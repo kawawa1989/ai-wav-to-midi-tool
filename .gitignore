@@ -1,0 +1,42 @@
+# --- 著作物・生成物（ADR-07：原曲・生成MIDI・譜面はコミットしない） ---
+data/**
+!data/*/
+!data/*/.gitkeep
+*.mp3
+*.wav
+*.flac
+*.m4a
+*.aac
+*.ogg
+*.aif
+*.aiff
+*.mid
+*.midi
+*.musicxml
+*.mxl
+*.mscz
+*.pdf
+# テスト用の自作・公開可能素材だけはここに置いて明示的に許可する
+!tests/fixtures/**
+
+# --- 秘密情報 ---
+.env
+.env.*
+*.token
+.huggingface/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# --- OS / エディタ ---
+.DS_Store
+.idea/
+.vscode/

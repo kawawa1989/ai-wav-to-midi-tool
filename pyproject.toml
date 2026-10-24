@@ -1,0 +1,43 @@
+[project]
+name = "ai-wav-to-midi"
+version = "0.1.0"
+description = "ローカル音源から楽器別MIDIとバンドスコアを生成するツール（MuScriptorラッパー）"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "typer>=0.12",
+]
+
+[project.scripts]
+ai-wav-to-midi = "ai_wav_to_midi.cli:app"
+
+[dependency-groups]
+# 採譜エンジン本体。torchを含み重いため、CIでは --no-group engine で外す。
+# 重みのrevisionはFR-10に従いジョブごとに記録する。0.x系はCLIが変わりうるのでマイナー版で固定。
+engine = [
+    "muscriptor>=0.4,<0.5",
+]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+]
+
+[tool.uv]
+default-groups = ["dev", "engine"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/ai_wav_to_midi"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
